@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainCameraMovement : MonoBehaviour
+public class BodyMovement : MonoBehaviour
 {
     private MouseMovement mouseMovement;
 
