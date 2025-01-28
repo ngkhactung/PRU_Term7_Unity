@@ -8,7 +8,7 @@ public class MouseMovement
     float xRotation = 0f;
     float yRotation = 0f;
 
-    public float topClamp = 30f;
+    public float topClamp = 50f;
     public float bottomClamp = -30f;
 
     public MouseMovement()
