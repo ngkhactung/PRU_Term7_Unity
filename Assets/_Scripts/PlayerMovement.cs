@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
-    private MouseMovement mouseMovement;
 
     float xRotation = 0f;
     float yRotation = 0f;
@@ -26,14 +25,13 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        mouseMovement = new MouseMovement();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Getting the inputs
-        float yRotaiton = mouseMovement.GetRotationY();
+        float yRotaiton = GlobalReferences.Instance.mouseMovement.GetRotationY();
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 

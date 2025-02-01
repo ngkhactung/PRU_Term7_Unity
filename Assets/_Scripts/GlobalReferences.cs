@@ -4,6 +4,8 @@ public class GlobalReferences : MonoBehaviour
 {
     public static GlobalReferences Instance { get; set; }
 
+    public MouseMovement mouseMovement;
+
     public GameObject bulletImpactEffectPrefab;
 
     private void Awake()
@@ -15,6 +17,7 @@ public class GlobalReferences : MonoBehaviour
         else
         {
             Instance = this;
+            mouseMovement = new MouseMovement();
         }
     }
 }

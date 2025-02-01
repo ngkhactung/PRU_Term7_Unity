@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -24,6 +25,18 @@ public class Weapon : MonoBehaviour
     public float bulletVelocity = 100f;
     public float bulletPerfabLifeTime = 3f;
 
+    //Reloading
+    public float reloadTime;
+    public int magazineSize;
+    public int bulletsLeft;
+    public bool isReloading;
+
+    //Muzzle 
+    public GameObject muzzleEffect;
+
+    //Animation
+    private Animator animator;
+
     //Shooting mode
     public enum ShootingMode
     {
@@ -38,6 +51,9 @@ public class Weapon : MonoBehaviour
         readyToShoot = true;
         allowReset = true;
         burstBulletsLeft = bulletsPerBurst;
+        animator = GetComponent<Animator>();
+
+        bulletsLeft = magazineSize;
     }
 
     // Update is called once per frame
@@ -54,11 +70,25 @@ public class Weapon : MonoBehaviour
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isReloading == false)
+        {
+            Reload();
+        }
+
         if (readyToShoot && isShooting)
         {
             FireWeapon();
         }
 
+        if (bulletsLeft == 0 && isShooting)
+        {
+            SoundManager.Instance.emptyMagazine.Play();
+        }
+
+        if (AmmoManager.Instance.ammoDisplay != null)
+        {
+            AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
+        }
     }
 
     private void FireWeapon()
@@ -76,6 +106,12 @@ public class Weapon : MonoBehaviour
 
         //Shoot the bullet
         bullet.GetComponent<Rigidbody>().AddForce(shootingDirection.normalized * bulletVelocity, ForceMode.Impulse);
+        bulletsLeft--;
+
+        //Create muzzle effect
+        muzzleEffect.GetComponent<ParticleSystem>().Play();
+        animator.SetTrigger("RECOIL");
+        SoundManager.Instance.shootingPistolGray.Play();
 
         //Destroy the bullet after the some time
         StartCoroutine(DestroyBulletAfterTime(bullet, bulletPerfabLifeTime));
@@ -97,12 +133,27 @@ public class Weapon : MonoBehaviour
 
     private void ResetShot()
     {
-        readyToShoot = true;
         allowReset = true;
-        if (currentShootingMode == ShootingMode.Burst)
-        {
-            burstBulletsLeft = bulletsPerBurst;
-        }
+        if (bulletsLeft > 0 && isReloading == false) readyToShoot = true;
+        //if (currentShootingMode == ShootingMode.Burst)
+        //{
+        //    burstBulletsLeft = bulletsPerBurst;
+        //}
+    }
+
+    private void Reload()
+    {
+        isReloading = true;
+        readyToShoot = false;
+        SoundManager.Instance.reloadPistolGray.Play();
+        Invoke("ReloadCompleted", reloadTime);
+    }
+
+    private void ReloadCompleted()
+    {
+        bulletsLeft = magazineSize;
+        readyToShoot = true;
+        isReloading = false;
     }
 
     private Vector3 CalculateDirectionAndSpread()
