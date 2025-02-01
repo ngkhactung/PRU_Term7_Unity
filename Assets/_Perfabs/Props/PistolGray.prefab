@@ -5258,6 +5258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8942749510328597261}
   - component: {fileID: 6590898071574465365}
+  - component: {fileID: 3372236991107432675}
   m_Layer: 0
   m_Name: PistolGray
   m_TagString: Untagged
@@ -5275,7 +5276,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.479, y: 0.437, z: 1.37}
-  m_LocalScale: {x: 4, y: 2.92, z: 4}
+  m_LocalScale: {x: 4, y: 2.9199998, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9172157726809471492}
@@ -5303,7 +5304,7 @@ MonoBehaviour:
   readyToShoot: 0
   allowReset: 0
   shootingDelay: 0.5
-  bulletsPerBurst: 0
+  bulletsPerBurst: 1
   burstBulletsLeft: 0
   burstShootingDelay: 0
   spreadIntensity: 0.1
@@ -5311,12 +5312,35 @@ MonoBehaviour:
   bulletSpawn: {fileID: 6890757904478762588}
   bulletVelocity: 500
   bulletPerfabLifeTime: 3
-  reloadTime: 0
-  magazineSize: 0
+  reloadTime: 1.5
+  magazineSize: 7
   bulletsLeft: 0
   isReloading: 0
-  muzzleEffect: {fileID: 0}
+  muzzleEffect: {fileID: 5535350381442587101}
+  currentWeaponModel: 0
   currentShootingMode: 0
+--- !u!95 &3372236991107432675
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7000736065124306406}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e443cbc234e8caa4c9f9c9501b7a1996, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7423485927240854944
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,18 @@
 using UnityEngine;
+using static Weapon;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; set; }
 
-    public AudioSource shootingPistolGray;
-    public AudioSource reloadPistolGray;
-    public AudioSource emptyMagazine;
+    public AudioSource ShootingChannel;
+    public AudioSource ReloadChannel;
+    public AudioSource EmptyMagazine;
 
+    public AudioClip PistolGrayShot;
+    public AudioClip PistolGrayReload;
+    public AudioClip M4A1Shot;
+    public AudioClip M4A1Reload;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -17,6 +22,28 @@ public class SoundManager : MonoBehaviour
         else
         {
             Instance = this;
+        }
+    }
+
+    public void PlayShootingSound(WeaponModel weapon)
+    {
+        switch (weapon)
+        {
+            case WeaponModel.PistolGray:
+                ShootingChannel.PlayOneShot(PistolGrayShot); break;
+            case WeaponModel.M4A1:
+                ShootingChannel.PlayOneShot(M4A1Shot); break;
+        }
+    }
+
+    public void PlayReloadSound(WeaponModel weapon)
+    {
+        switch (weapon)
+        {
+            case WeaponModel.PistolGray:
+                ShootingChannel.PlayOneShot(PistolGrayReload); break;
+            case WeaponModel.M4A1:
+                ShootingChannel.PlayOneShot(M4A1Reload); break;
         }
     }
 }

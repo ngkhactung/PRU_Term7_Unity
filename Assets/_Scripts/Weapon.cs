@@ -37,6 +37,14 @@ public class Weapon : MonoBehaviour
     //Animation
     private Animator animator;
 
+    //Weapon models
+    public enum WeaponModel
+    {
+        PistolGray,
+        M4A1
+    }
+    public WeaponModel currentWeaponModel;
+
     //Shooting mode
     public enum ShootingMode
     {
@@ -82,7 +90,7 @@ public class Weapon : MonoBehaviour
 
         if (bulletsLeft == 0 && isShooting)
         {
-            SoundManager.Instance.emptyMagazine.Play();
+            SoundManager.Instance.EmptyMagazine.Play();
         }
 
         if (AmmoManager.Instance.ammoDisplay != null)
@@ -111,7 +119,7 @@ public class Weapon : MonoBehaviour
         //Create muzzle effect
         muzzleEffect.GetComponent<ParticleSystem>().Play();
         animator.SetTrigger("RECOIL");
-        SoundManager.Instance.shootingPistolGray.Play();
+        SoundManager.Instance.PlayShootingSound(currentWeaponModel);
 
         //Destroy the bullet after the some time
         StartCoroutine(DestroyBulletAfterTime(bullet, bulletPerfabLifeTime));
@@ -145,7 +153,8 @@ public class Weapon : MonoBehaviour
     {
         isReloading = true;
         readyToShoot = false;
-        SoundManager.Instance.reloadPistolGray.Play();
+        SoundManager.Instance.PlayReloadSound(currentWeaponModel);
+        animator.SetTrigger("RELOAD");
         Invoke("ReloadCompleted", reloadTime);
     }
 
