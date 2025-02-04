@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public bool isActiveWeapon;
+
     //Shooting
     public bool isShooting;
     public bool readyToShoot;
@@ -30,6 +32,10 @@ public class Weapon : MonoBehaviour
     public int magazineSize;
     public int bulletsLeft;
     public bool isReloading;
+
+    //Spawn position in player's hand
+    public Vector3 spawnPosition;
+    public Vector3 spawnRotation;
 
     //Muzzle 
     public GameObject muzzleEffect;
@@ -67,6 +73,8 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isActiveWeapon == false) return;
+
         if (currentShootingMode == ShootingMode.Auto)
         {
             //Holding Down Left Mouse Button
@@ -78,25 +86,15 @@ public class Weapon : MonoBehaviour
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isReloading == false)
-        {
-            Reload();
-        }
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isReloading == false) Reload();
 
-        if (readyToShoot && isShooting)
-        {
-            FireWeapon();
-        }
+        if (readyToShoot && isShooting) FireWeapon();
 
         if (bulletsLeft == 0 && isShooting)
-        {
             SoundManager.Instance.EmptyMagazine.Play();
-        }
 
         if (AmmoManager.Instance.ammoDisplay != null)
-        {
             AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
-        }
     }
 
     private void FireWeapon()

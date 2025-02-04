@@ -181,15 +181,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 688408429850876192}
+  - component: {fileID: 7237247823032399978}
   - component: {fileID: 2268940155608592412}
   - component: {fileID: 1341296647211099646}
+  - component: {fileID: 6893162132653077783}
   m_Layer: 0
   m_Name: M4A1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &688408429850876192
 Transform:
   m_ObjectHideFlags: 0
@@ -200,7 +202,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.76, y: 0.358, z: 1.56}
-  m_LocalScale: {x: 2.6, y: 2.6, z: 2.6}
+  m_LocalScale: {x: 2.6000001, y: 2.6000004, z: 2.6000009}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3478922434892013569}
@@ -217,6 +219,27 @@ Transform:
   - {fileID: 4359265303830455815}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7237247823032399978
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863075901891426678}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08414674, y: 0.3599371, z: 1.1498215}
+  m_Center: {x: -0.002927426, y: -0.0088377865, z: 0.17150883}
 --- !u!114 &2268940155608592412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6163dc8671c74384fa251020f65d2864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActiveWeapon: 0
   isShooting: 0
   readyToShoot: 0
   allowReset: 0
@@ -245,6 +269,8 @@ MonoBehaviour:
   magazineSize: 30
   bulletsLeft: 0
   isReloading: 0
+  spawnPosition: {x: 0.76, y: 0.358, z: 1.56}
+  spawnRotation: {x: 0, y: 0, z: 0}
   muzzleEffect: {fileID: 2821432129414593850}
   currentWeaponModel: 1
   currentShootingMode: 2
@@ -256,7 +282,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863075901891426678}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 98eca0eeea36b4245984725b546725e3, type: 2}
   m_CullingMode: 0
@@ -270,6 +296,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6893162132653077783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863075901891426678}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2821432129414593850
 GameObject:
   m_ObjectHideFlags: 0
