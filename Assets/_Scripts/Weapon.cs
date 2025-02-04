@@ -62,12 +62,12 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        readyToShoot = true;
+        readyToShoot = false;
         allowReset = true;
-        burstBulletsLeft = bulletsPerBurst;
         animator = GetComponent<Animator>();
 
-        bulletsLeft = magazineSize;
+        burstBulletsLeft = bulletsPerBurst;
+        //bulletsLeft = magazineSize;
     }
 
     // Update is called once per frame
@@ -86,15 +86,17 @@ public class Weapon : MonoBehaviour
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isReloading == false) Reload();
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize
+            && CheckAmmoLeftOfCurrentWeapon() > 0 && isReloading == false)
+        {
+            Reload();
+        }
 
         if (readyToShoot && isShooting) FireWeapon();
 
         if (bulletsLeft == 0 && isShooting)
             SoundManager.Instance.EmptyMagazine.Play();
 
-        if (AmmoManager.Instance.ammoDisplay != null)
-            AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
     }
 
     private void FireWeapon()
@@ -158,9 +160,54 @@ public class Weapon : MonoBehaviour
 
     private void ReloadCompleted()
     {
-        bulletsLeft = magazineSize;
+        //Calculate the loaded bullets and the total remaining ammo.
+        CalculateBulletLeft();
         readyToShoot = true;
         isReloading = false;
+    }
+
+    public int CheckAmmoLeftOfCurrentWeapon()
+    {
+        switch (currentWeaponModel)
+        {
+            case WeaponModel.PistolGray:
+                return WeaponManager.Instance.totalPistolAmmo;
+            case WeaponModel.M4A1:
+                return WeaponManager.Instance.totalRifleAmmo;
+            default:
+                return 0;
+        }
+    }
+
+    private void CalculateBulletLeft()
+    {
+        // Calculate the remaining ammo in inventory after reloading
+        int remainingTotalAmmo = bulletsLeft + CheckAmmoLeftOfCurrentWeapon() - magazineSize;
+
+        // If there is enough ammo to fully reload the magazine
+        if (remainingTotalAmmo >= 0)
+        {
+            bulletsLeft = magazineSize; // Fill the magazine to its full capacity
+            DecreaseTotalAmmo(remainingTotalAmmo);
+        }
+        else
+        {
+            bulletsLeft += CheckAmmoLeftOfCurrentWeapon(); // Add all available ammo to the magazine
+            DecreaseTotalAmmo(0);
+        }
+    }
+
+    private void DecreaseTotalAmmo(int remainingTotalAmmo)
+    {
+        switch (currentWeaponModel)
+        {
+            case WeaponModel.PistolGray:
+                WeaponManager.Instance.totalPistolAmmo = remainingTotalAmmo;
+                break;
+            case WeaponModel.M4A1:
+                WeaponManager.Instance.totalRifleAmmo = remainingTotalAmmo;
+                break;
+        }
     }
 
     private Vector3 CalculateDirectionAndSpread()

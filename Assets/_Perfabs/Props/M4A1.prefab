@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5562220872848581699}
   - component: {fileID: 2988983670210606083}
   - component: {fileID: 356343005238892018}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_BarrelGuard_Rail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4146086501129373154}
   - component: {fileID: 1086583663517731576}
   - component: {fileID: 3860919008497601252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,8 +184,8 @@ GameObject:
   - component: {fileID: 7237247823032399978}
   - component: {fileID: 2268940155608592412}
   - component: {fileID: 1341296647211099646}
-  - component: {fileID: 6893162132653077783}
-  m_Layer: 0
+  - component: {fileID: 6729867388904601839}
+  m_Layer: 6
   m_Name: M4A1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6893162132653077783
+--- !u!114 &6729867388904601839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 4
+  outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 8873727490934786761}
   - component: {fileID: 5231113689937762987}
   - component: {fileID: 2422154628672692533}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MuzzleFlashEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5111,7 +5111,7 @@ GameObject:
   - component: {fileID: 1128051756603493382}
   - component: {fileID: 9135669657145793028}
   - component: {fileID: 5314457661565120852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Receiver_Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5197,7 +5197,7 @@ GameObject:
   - component: {fileID: 5644637282425292898}
   - component: {fileID: 1735208611896013809}
   - component: {fileID: 1966555114740511142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5281,7 +5281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4359265303830455815}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5315,7 +5315,7 @@ GameObject:
   - component: {fileID: 3478922434892013569}
   - component: {fileID: 7817164581224953479}
   - component: {fileID: 8217582102956695818}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5401,7 +5401,7 @@ GameObject:
   - component: {fileID: 3787729931189051688}
   - component: {fileID: 2730593934375931474}
   - component: {fileID: 9057800176720105978}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5487,7 +5487,7 @@ GameObject:
   - component: {fileID: 1946887043046275432}
   - component: {fileID: 9039936985606838608}
   - component: {fileID: 5576366050285213085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5573,7 +5573,7 @@ GameObject:
   - component: {fileID: 7175651508730757040}
   - component: {fileID: 4049499160941569239}
   - component: {fileID: 6178036144860506076}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Receiver_Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5659,7 +5659,7 @@ GameObject:
   - component: {fileID: 8508615382070713445}
   - component: {fileID: 93900649968202508}
   - component: {fileID: 1633495417294155049}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_BarrelGuard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5746,7 +5746,7 @@ GameObject:
   - component: {fileID: 1469698747459506531}
   - component: {fileID: 2453469437258264753}
   - component: {fileID: 8939055142255084449}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Rail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5832,7 +5832,7 @@ GameObject:
   - component: {fileID: 5931328840045332301}
   - component: {fileID: 7340920023229241666}
   - component: {fileID: 6133938603455938991}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5918,7 +5918,7 @@ GameObject:
   - component: {fileID: 1969621970672378779}
   - component: {fileID: 9058152657844093784}
   - component: {fileID: 1398929665321267539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AR_A_Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

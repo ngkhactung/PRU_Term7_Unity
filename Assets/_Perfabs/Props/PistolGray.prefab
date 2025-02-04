@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3734796161455996619}
   - component: {fileID: 4033599919281989991}
   - component: {fileID: 7228348147709792240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol_D_Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6890757904478762588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 8996131153944779322}
   - component: {fileID: 764095316871820911}
   - component: {fileID: 5270005106980452205}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol_D_Receiver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 1609001212921967788}
   - component: {fileID: 5054154204923644865}
   - component: {fileID: 2050659792928516225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol_D_Receiver_Part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 792523338708331327}
   - component: {fileID: 5721021068762506713}
   - component: {fileID: 4236477943349713163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MuzzleFlashEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5087,7 +5087,7 @@ GameObject:
   - component: {fileID: 7238469601723695565}
   - component: {fileID: 894441844532740356}
   - component: {fileID: 1873889982597920166}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol_D_Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5173,7 +5173,7 @@ GameObject:
   - component: {fileID: 7799657262098036178}
   - component: {fileID: 8670266985242467873}
   - component: {fileID: 5766152212252285845}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol_D_Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5260,8 +5260,8 @@ GameObject:
   - component: {fileID: 2699213476594702574}
   - component: {fileID: 6590898071574465365}
   - component: {fileID: 3372236991107432675}
-  - component: {fileID: 7951314092623432663}
-  m_Layer: 0
+  - component: {fileID: 7991410719123690681}
+  m_Layer: 6
   m_Name: PistolGray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5367,7 +5367,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7951314092623432663
+--- !u!114 &7991410719123690681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5396,7 +5396,7 @@ GameObject:
   - component: {fileID: 9172157726809471492}
   - component: {fileID: 8156974561882023630}
   - component: {fileID: 3306713726181524543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pistol_D_Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,6 +10,10 @@ public class WeaponManager : MonoBehaviour
 
     public GameObject activeWeaponSlot;
 
+    [Header("Ammo")]
+    public int totalPistolAmmo = 0;
+    public int totalRifleAmmo = 0;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -45,12 +49,24 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    public void PickUpWeapon(GameObject pickedWeapon)
+    public void PickUpAmmoBox(GameObject pickedAmmoBox)
     {
-        AddPickedWeaponIntoActiveSlot(pickedWeapon);
+        AmmoBox ammo = pickedAmmoBox.GetComponent<AmmoBox>();
+
+        switch (ammo.ammoType)
+        {
+            case AmmoBox.AmmoType.PistolAmmo:
+                totalPistolAmmo += ammo.ammoAmount;
+                break;
+            case AmmoBox.AmmoType.RifleAmmo:
+                totalRifleAmmo += ammo.ammoAmount;
+                break;
+        }
+
+        Destroy(pickedAmmoBox);
     }
 
-    private void AddPickedWeaponIntoActiveSlot(GameObject pickedWeapon)
+    public void PickUpWeapon(GameObject pickedWeapon)
     {
         DropCurrentWeapon(pickedWeapon);
 
