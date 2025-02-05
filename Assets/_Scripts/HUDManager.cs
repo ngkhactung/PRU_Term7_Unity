@@ -10,6 +10,7 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI magazineAmmoUI;
     public TextMeshProUGUI totalAmmoUI;
     public Image ammoTypeUI;
+    public Image magazineTypeUI;
 
     [Header("Weapon")]
     public Image activeWeaponUI;
@@ -46,6 +47,7 @@ public class HUDManager : MonoBehaviour
             magazineAmmoUI.text = $"{activeWeapon.bulletsLeft / activeWeapon.bulletsPerBurst}";
             totalAmmoUI.text = $"{activeWeapon.CheckAmmoLeftOfCurrentWeapon() / activeWeapon.bulletsPerBurst}";
 
+            magazineTypeUI.sprite = GetMagazineSprite(activeWeapon.currentWeaponModel);
             ammoTypeUI.sprite = GetAmmoSprite(activeWeapon.currentWeaponModel);
 
             activeWeaponUI.sprite = GetWeaponSprite(activeWeapon.currentWeaponModel);
@@ -55,7 +57,8 @@ public class HUDManager : MonoBehaviour
             magazineAmmoUI.text = "0";
             totalAmmoUI.text = "0";
 
-            ammoTypeUI.sprite = Resources.Load<GameObject>("Pistol_Ammo").GetComponent<SpriteRenderer>().sprite;
+            magazineTypeUI.sprite = Resources.Load<GameObject>("Magazine").GetComponent<SpriteRenderer>().sprite;
+            ammoTypeUI.sprite = Resources.Load<GameObject>("Ammo").GetComponent<SpriteRenderer>().sprite;
             activeWeaponUI.sprite = emptyWeapon;
         }
 
@@ -87,6 +90,19 @@ public class HUDManager : MonoBehaviour
                 return Resources.Load<GameObject>("Pistol_Ammo").GetComponent<SpriteRenderer>().sprite;
             case Weapon.WeaponModel.M4A1:
                 return Resources.Load<GameObject>("Rifle_Ammo").GetComponent<SpriteRenderer>().sprite;
+            default:
+                return null;
+        }
+    }
+
+    private Sprite GetMagazineSprite(Weapon.WeaponModel model)
+    {
+        switch (model)
+        {
+            case Weapon.WeaponModel.PistolGray:
+                return Resources.Load<GameObject>("Pistol_Magazine").GetComponent<SpriteRenderer>().sprite;
+            case Weapon.WeaponModel.M4A1:
+                return Resources.Load<GameObject>("Rifle_Magazine").GetComponent<SpriteRenderer>().sprite;
             default:
                 return null;
         }
