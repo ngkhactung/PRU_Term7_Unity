@@ -238,8 +238,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.08414674, y: 0.3599371, z: 1.1498215}
-  m_Center: {x: -0.002927426, y: -0.0088377865, z: 0.17150883}
+  m_Size: {x: 0.08414674, y: 0.3118936, z: 1.1530154}
+  m_Center: {x: -0.0029274246, y: -0.031112518, z: 0.17310588}
 --- !u!114 &2268940155608592412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,24 +253,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveWeapon: 0
-  isShooting: 0
-  readyToShoot: 0
-  allowReset: 0
   shootingDelay: 0.15
-  bulletsPerBurst: 1
-  burstBulletsLeft: 0
-  burstShootingDelay: 0.1
-  spreadIntensity: 0.1
   butlletPrefab: {fileID: 6922481648929464908, guid: f12fec9aa68fa4745aab8734b8a6f599, type: 3}
   bulletSpawn: {fileID: 4359265303830455815}
   bulletVelocity: 650
   bulletPerfabLifeTime: 3
   reloadTime: 2
   magazineSize: 30
-  bulletsLeft: 0
-  isReloading: 0
+  hitSpreadIntensity: 0
+  adsSpreadIntensity: 0
   spawnPosition: {x: 0.76, y: 0.358, z: 1.56}
   spawnRotation: {x: 0, y: 0, z: 0}
+  bulletsPerBurst: 1
+  burstShootingDelay: 0.1
   muzzleEffect: {fileID: 2821432129414593850}
   currentWeaponModel: 1
   currentShootingMode: 2

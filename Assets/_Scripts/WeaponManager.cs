@@ -71,7 +71,6 @@ public class WeaponManager : MonoBehaviour
         DropCurrentWeapon(pickedWeapon);
 
         pickedWeapon.GetComponent<Animator>().enabled = true;
-        pickedWeapon.GetComponent<Outline>().enabled = false;
         pickedWeapon.transform.SetParent(activeWeaponSlot.transform, false);
         Weapon weapon = pickedWeapon.GetComponent<Weapon>();
         pickedWeapon.transform.localPosition = new Vector3(weapon.spawnPosition.x, weapon.spawnPosition.y, weapon.spawnPosition.z);

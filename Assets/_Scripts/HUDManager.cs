@@ -25,6 +25,9 @@ public class HUDManager : MonoBehaviour
 
     public Sprite emptyWeapon;
     public Sprite emptySprite;
+
+    [Header("Middle Point")]
+    public GameObject middlePoint;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -57,8 +60,8 @@ public class HUDManager : MonoBehaviour
             magazineAmmoUI.text = "0";
             totalAmmoUI.text = "0";
 
-            magazineTypeUI.sprite = Resources.Load<GameObject>("Magazine").GetComponent<SpriteRenderer>().sprite;
-            ammoTypeUI.sprite = Resources.Load<GameObject>("Ammo").GetComponent<SpriteRenderer>().sprite;
+            magazineTypeUI.sprite = ResourceLoad("Magazine");
+            ammoTypeUI.sprite = ResourceLoad("Ammo");
             activeWeaponUI.sprite = emptyWeapon;
         }
 
@@ -87,9 +90,9 @@ public class HUDManager : MonoBehaviour
         switch (model)
         {
             case Weapon.WeaponModel.PistolGray:
-                return Resources.Load<GameObject>("Pistol_Ammo").GetComponent<SpriteRenderer>().sprite;
+                return ResourceLoad("Pistol_Ammo");
             case Weapon.WeaponModel.M4A1:
-                return Resources.Load<GameObject>("Rifle_Ammo").GetComponent<SpriteRenderer>().sprite;
+                return ResourceLoad("Rifle_Ammo");
             default:
                 return null;
         }
@@ -100,9 +103,9 @@ public class HUDManager : MonoBehaviour
         switch (model)
         {
             case Weapon.WeaponModel.PistolGray:
-                return Resources.Load<GameObject>("Pistol_Magazine").GetComponent<SpriteRenderer>().sprite;
+                return ResourceLoad("Pistol_Magazine");
             case Weapon.WeaponModel.M4A1:
-                return Resources.Load<GameObject>("Rifle_Magazine").GetComponent<SpriteRenderer>().sprite;
+                return ResourceLoad("Rifle_Magazine");
             default:
                 return null;
         }
@@ -113,11 +116,16 @@ public class HUDManager : MonoBehaviour
         switch (model)
         {
             case Weapon.WeaponModel.PistolGray:
-                return Resources.Load<GameObject>("Pistol_Weapon").GetComponent<SpriteRenderer>().sprite;
+                return ResourceLoad("Pistol_Weapon");
             case Weapon.WeaponModel.M4A1:
-                return Resources.Load<GameObject>("M4A1_Weapon").GetComponent<SpriteRenderer>().sprite;
+                return ResourceLoad("M4A1_Weapon");
             default:
                 return null;
         }
+    }
+
+    private Sprite ResourceLoad(string objectName)
+    {
+        return Resources.Load<GameObject>(objectName).GetComponent<SpriteRenderer>().sprite;
     }
 }

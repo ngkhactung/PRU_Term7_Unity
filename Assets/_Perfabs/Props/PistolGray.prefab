@@ -5278,7 +5278,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.479, y: 0.437, z: 1.37}
-  m_LocalScale: {x: 4, y: 2.920001, z: 4}
+  m_LocalScale: {x: 4, y: 2.92, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9172157726809471492}
@@ -5309,8 +5309,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.046287894, y: 0.23149781, z: 0.38036042}
-  m_Center: {x: 0.0015254561, y: 0.02674266, z: 0.10827482}
+  m_Size: {x: 0.046287894, y: 0.21303074, z: 0.38036042}
+  m_Center: {x: 0.0015254203, y: 0.00080178777, z: 0.10827455}
 --- !u!114 &6590898071574465365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5324,24 +5324,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActiveWeapon: 0
-  isShooting: 0
-  readyToShoot: 0
-  allowReset: 0
   shootingDelay: 0.5
-  bulletsPerBurst: 1
-  burstBulletsLeft: 0
-  burstShootingDelay: 0
-  spreadIntensity: 0.1
   butlletPrefab: {fileID: 6922481648929464908, guid: f12fec9aa68fa4745aab8734b8a6f599, type: 3}
   bulletSpawn: {fileID: 6890757904478762588}
   bulletVelocity: 500
   bulletPerfabLifeTime: 3
   reloadTime: 1.5
   magazineSize: 7
-  bulletsLeft: 0
-  isReloading: 0
+  hipSpreadIntensity: 0.4
+  adsSpreadIntensity: 0.1
   spawnPosition: {x: 0.479, y: 0.437, z: 1.37}
   spawnRotation: {x: 0, y: 0, z: 0}
+  bulletsPerBurst: 1
+  burstShootingDelay: 0
   muzzleEffect: {fileID: 5535350381442587101}
   currentWeaponModel: 0
   currentShootingMode: 0

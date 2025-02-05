@@ -1,64 +1,79 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("Active Weapon")]
     public bool isActiveWeapon;
 
+    //Animation
+    private Animator animator;
+
+    //ADS mode
+    private bool isAdsMode = false;
+
     //Shooting
-    public bool isShooting;
-    public bool readyToShoot;
-    public bool allowReset;
+    [Header("Shooting")]
     public float shootingDelay = 2f;
-
-    //Burst
-    public int bulletsPerBurst = 3;
-    public int burstBulletsLeft;
-    public float burstShootingDelay = 0.2f;
-
-    //Spread 
-    public float spreadIntensity;
+    private bool isShooting;
+    private bool readyToShoot;
+    private bool allowReset;
 
     //Bullet
+    [Header("Bullet")]
     public GameObject butlletPrefab;
     public Transform bulletSpawn;
     public float bulletVelocity = 100f;
     public float bulletPerfabLifeTime = 3f;
 
     //Reloading
+    [Header("Reloading")]
     public float reloadTime;
     public int magazineSize;
-    public int bulletsLeft;
-    public bool isReloading;
+    internal int bulletsLeft;
+    private bool isReloading;
+
+    //Spread 
+    [Header("Spread")]
+    public float hipSpreadIntensity;
+    public float adsSpreadIntensity;
+    private float spreadIntensity;
 
     //Spawn position in player's hand
+    [Header("Spawn Position")]
     public Vector3 spawnPosition;
     public Vector3 spawnRotation;
 
+    //Burst
+    [Header("Burst")]
+    public int bulletsPerBurst = 3;
+    public float burstShootingDelay = 0.2f;
+    private int burstBulletsLeft;
+
     //Muzzle 
+    [Header("Muzzle")]
     public GameObject muzzleEffect;
 
-    //Animation
-    private Animator animator;
-
     //Weapon models
+    [Header("WeaponMode")]
+    public WeaponModel currentWeaponModel;
     public enum WeaponModel
     {
         PistolGray,
         M4A1
     }
-    public WeaponModel currentWeaponModel;
 
     //Shooting mode
+    public ShootingMode currentShootingMode;
     public enum ShootingMode
     {
         Single,
         Burst,
         Auto
     }
-    public ShootingMode currentShootingMode;
 
     private void Awake()
     {
@@ -67,13 +82,24 @@ public class Weapon : MonoBehaviour
         animator = GetComponent<Animator>();
 
         burstBulletsLeft = bulletsPerBurst;
-        //bulletsLeft = magazineSize;
+        spreadIntensity = hipSpreadIntensity;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // If the weapon is not active, exit the function early.
         if (isActiveWeapon == false) return;
+
+        // Disable the white outline effect on the currently active weapon.
+        GetComponent<Outline>().enabled = false;
+
+        // Toggle ADS (Aim Down Sights) mode
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            isAdsMode = !isAdsMode;
+            ToggleAdsMode(isAdsMode);
+        }
 
         if (currentShootingMode == ShootingMode.Auto)
         {
@@ -86,17 +112,19 @@ public class Weapon : MonoBehaviour
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
+        // Handle reloading
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize
             && CheckAmmoLeftOfCurrentWeapon() > 0 && isReloading == false)
         {
             Reload();
         }
 
+        // Fire the weapon
         if (readyToShoot && isShooting) FireWeapon();
 
+        // Play an empty magazine sound when trying to shoot with no bullets left.
         if (bulletsLeft == 0 && isShooting)
             SoundManager.Instance.EmptyMagazine.Play();
-
     }
 
     private void FireWeapon()
@@ -207,6 +235,22 @@ public class Weapon : MonoBehaviour
             case WeaponModel.M4A1:
                 WeaponManager.Instance.totalRifleAmmo = remainingTotalAmmo;
                 break;
+        }
+    }
+
+    private void ToggleAdsMode(bool isAdsMode)
+    {
+        if (isAdsMode)
+        {
+            animator.SetTrigger("EnterADS");
+            HUDManager.Instance.middlePoint.SetActive(false);
+            spreadIntensity = adsSpreadIntensity;
+        }
+        else
+        {
+            animator.SetTrigger("ExitADS");
+            HUDManager.Instance.middlePoint.SetActive(true);
+            spreadIntensity = hipSpreadIntensity;
         }
     }
 

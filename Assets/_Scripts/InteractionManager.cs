@@ -8,6 +8,8 @@ public class InteractionManager : MonoBehaviour
 
     public GameObject hoveredAmmoBox = null;
 
+    public GameObject hoveredItem = null;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -29,41 +31,29 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject objectHitByRay = hit.transform.gameObject;
 
-            if (objectHitByRay.GetComponent<Weapon>())
+            if (objectHitByRay.GetComponent<Weapon>() || objectHitByRay.GetComponent<AmmoBox>())
             {
-                hoveredWeapon = objectHitByRay.gameObject;
-                hoveredWeapon.GetComponent<Outline>().enabled = true;
+                hoveredItem = objectHitByRay;
+                hoveredItem.GetComponent<Outline>().enabled = true;
 
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    WeaponManager.Instance.PickUpWeapon(hoveredWeapon);
-                }
+                if (Input.GetKeyDown(KeyCode.F)) PickUpItem(hoveredItem);
             }
             else
             {
-                if (hoveredWeapon != null)
-                {
-                    hoveredWeapon.GetComponent<Outline>().enabled = false;
-                }
+                if (hoveredItem != null) hoveredItem.GetComponent<Outline>().enabled = false; hoveredItem = null;
             }
+        }
+    }
 
-            if (objectHitByRay.GetComponent<AmmoBox>())
-            {
-                hoveredAmmoBox = objectHitByRay.gameObject;
-                hoveredAmmoBox.GetComponent<Outline>().enabled = true;
-
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    WeaponManager.Instance.PickUpAmmoBox(hoveredAmmoBox);
-                }
-            }
-            else
-            {
-                if (hoveredAmmoBox != null)
-                {
-                    hoveredAmmoBox.GetComponent<Outline>().enabled = false;
-                }
-            }
+    private void PickUpItem(GameObject hoveredItem)
+    {
+        if (hoveredItem.GetComponent<Weapon>())
+        {
+            WeaponManager.Instance.PickUpWeapon(hoveredItem);
+        }
+        else if (hoveredItem.GetComponent<AmmoBox>())
+        {
+            WeaponManager.Instance.PickUpAmmoBox(hoveredItem);
         }
     }
 }
