@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class AmmoBox : MonoBehaviour
 {
-    public int ammoAmount = 200;
+    //Ammo Type
+    [Header("Type")]
+    public AmmoType ammoType;
     public enum AmmoType
     {
         RifleAmmo,
         PistolAmmo
     }
-    public AmmoType ammoType;
 
+    //Size of Ammo box
+    [Header("Capacity")]
+    public int ammoAmount = 200;
 }

@@ -6,7 +6,7 @@ public class BodyMovement : MonoBehaviour
     void Update()
     {
         //Getting the inputs
-        float xRotation = GlobalReferences.Instance.mouseMovement.GetRotationX();
+        float xRotation = MouseMovementManager.Instance.GetRotationX();
 
         //Rotate around the X axis (Look up and down)
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);

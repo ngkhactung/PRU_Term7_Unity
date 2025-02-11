@@ -7,8 +7,11 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource ShootingChannel;
     public AudioSource ReloadChannel;
+    public AudioSource ThrowableChannel;
     public AudioSource EmptyMagazine;
 
+    public AudioClip GrenadeExplosion;
+    public AudioClip SmokeGrenadeExplosion;
     public AudioClip PistolGrayShot;
     public AudioClip PistolGrayReload;
     public AudioClip M4A1Shot;
@@ -44,6 +47,17 @@ public class SoundManager : MonoBehaviour
                 ShootingChannel.PlayOneShot(PistolGrayReload); break;
             case WeaponModel.M4A1:
                 ShootingChannel.PlayOneShot(M4A1Reload); break;
+        }
+    }
+
+    public void PlayThrowableSound(Throwable.ThrowableType throwableType)
+    {
+        switch (throwableType)
+        {
+            case Throwable.ThrowableType.Grenade:
+                ThrowableChannel.PlayOneShot(GrenadeExplosion); break;
+            case Throwable.ThrowableType.SmokeGrenade:
+                ThrowableChannel.PlayOneShot(SmokeGrenadeExplosion); break;
         }
     }
 }

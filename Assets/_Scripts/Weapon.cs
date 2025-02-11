@@ -15,6 +15,15 @@ public class Weapon : MonoBehaviour
     //ADS mode
     private bool isAdsMode = false;
 
+    //Weapon models
+    [Header("WeaponModel")]
+    public WeaponModel currentWeaponModel;
+    public enum WeaponModel
+    {
+        PistolGray,
+        M4A1
+    }
+
     //Shooting
     [Header("Shooting")]
     public float shootingDelay = 2f;
@@ -57,16 +66,8 @@ public class Weapon : MonoBehaviour
     [Header("Muzzle")]
     public GameObject muzzleEffect;
 
-    //Weapon models
-    [Header("WeaponMode")]
-    public WeaponModel currentWeaponModel;
-    public enum WeaponModel
-    {
-        PistolGray,
-        M4A1
-    }
-
     //Shooting mode
+    [Header("Shooting Mode")]
     public ShootingMode currentShootingMode;
     public enum ShootingMode
     {
@@ -144,7 +145,7 @@ public class Weapon : MonoBehaviour
         bullet.GetComponent<Rigidbody>().AddForce(shootingDirection.normalized * bulletVelocity, ForceMode.Impulse);
         bulletsLeft--;
 
-        //Create muzzle effect
+        //Shooting effect
         muzzleEffect.GetComponent<ParticleSystem>().Play();
         animator.SetTrigger("RECOIL");
         SoundManager.Instance.PlayShootingSound(currentWeaponModel);

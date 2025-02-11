@@ -14,6 +14,22 @@ public class WeaponManager : MonoBehaviour
     public int totalPistolAmmo = 0;
     public int totalRifleAmmo = 0;
 
+    [Header("Throwable General")]
+    public float throwForce = 20f;
+    public GameObject throwableSpawn;
+    public float forceMultiplier = 0;
+    public float forceMultiplierLimit = 2f;
+
+    [Header("Grenade")]
+    public int maxGrenade = 3;
+    public int totalGrenade = 0;
+    public GameObject grenadePrefab;
+
+    [Header("SmokeGrenade")]
+    public int maxSmokeGrenade = 3;
+    public int totalSmokeGrenade = 0;
+    public GameObject smokeGrenadePrefab;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -47,8 +63,31 @@ public class WeaponManager : MonoBehaviour
         {
             SwitchActiveSlot(1);
         }
+
+        if (Input.GetKey(KeyCode.G) && totalGrenade > 0)
+        {
+            SetForceMultiplier();
+        }
+
+        if (Input.GetKeyUp(KeyCode.G) && totalGrenade > 0)
+        {
+            ThrowGrenade();
+            forceMultiplier = 0;
+        }
+
+        if (Input.GetKey(KeyCode.T) && totalSmokeGrenade > 0)
+        {
+            SetForceMultiplier();
+        }
+
+        if (Input.GetKeyUp(KeyCode.T) && totalSmokeGrenade > 0)
+        {
+            ThrowSmokeGrenade();
+            forceMultiplier = 0;
+        }
     }
 
+    #region --- Ammo --- 
     public void PickUpAmmoBox(GameObject pickedAmmoBox)
     {
         AmmoBox ammo = pickedAmmoBox.GetComponent<AmmoBox>();
@@ -65,7 +104,9 @@ public class WeaponManager : MonoBehaviour
 
         Destroy(pickedAmmoBox);
     }
+    #endregion
 
+    #region --- Weapon ---
     public void PickUpWeapon(GameObject pickedWeapon)
     {
         DropCurrentWeapon(pickedWeapon);
@@ -80,7 +121,7 @@ public class WeaponManager : MonoBehaviour
 
     private void DropCurrentWeapon(GameObject pickedWeapon)
     {
-        if(activeWeaponSlot.transform.childCount > 0)
+        if (activeWeaponSlot.transform.childCount > 0)
         {
             var weaponToDrop = activeWeaponSlot.transform.GetChild(0).gameObject;
 
@@ -94,7 +135,7 @@ public class WeaponManager : MonoBehaviour
 
     private void SwitchActiveSlot(int SlotNumber)
     {
-        if(activeWeaponSlot.transform.childCount > 0)
+        if (activeWeaponSlot.transform.childCount > 0)
         {
             Weapon currentWeapon = activeWeaponSlot.transform.GetChild(0).gameObject.GetComponent<Weapon>();
             currentWeapon.isActiveWeapon = false;
@@ -108,4 +149,62 @@ public class WeaponManager : MonoBehaviour
             newWeapon.isActiveWeapon = true;
         }
     }
+    #endregion
+
+    #region --- Throwable ---
+    public void PickUpThrowable(GameObject pickedThrowable)
+    {
+        Throwable throwable = pickedThrowable.GetComponent<Throwable>();
+
+        switch (throwable.throwableType)
+        {
+            case Throwable.ThrowableType.Grenade:
+                if (totalGrenade < maxGrenade)
+                {
+                    totalGrenade += 1;
+                    Destroy(pickedThrowable);
+                }
+                break;
+            case Throwable.ThrowableType.SmokeGrenade:
+                if (totalSmokeGrenade < maxSmokeGrenade)
+                {
+                    totalSmokeGrenade += 1;
+                    Destroy(pickedThrowable);
+                }
+                break;
+        }
+    }
+
+    private void SetForceMultiplier()
+    {
+        forceMultiplier += Time.deltaTime;
+        if (forceMultiplier >= forceMultiplierLimit) forceMultiplier = forceMultiplierLimit;
+    }
+
+    private void ThrowGrenade()
+    {
+        GameObject throwable = Instantiate(grenadePrefab, throwableSpawn.transform.position, Camera.main.transform.rotation);
+
+        Rigidbody rigidbody = throwable.GetComponent<Rigidbody>();
+
+        rigidbody.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse);
+
+        throwable.GetComponent<Throwable>().hasBeenThrown = true;
+
+        totalGrenade -= 1;
+    }
+
+    private void ThrowSmokeGrenade()
+    {
+        GameObject throwable = Instantiate(smokeGrenadePrefab, throwableSpawn.transform.position, Camera.main.transform.rotation);
+
+        Rigidbody rigidbody = throwable.GetComponent<Rigidbody>();
+
+        rigidbody.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse);
+
+        throwable.GetComponent<Throwable>().hasBeenThrown = true;
+
+        totalSmokeGrenade -= 1;
+    }
+    #endregion
 }

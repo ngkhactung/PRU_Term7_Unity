@@ -28,6 +28,7 @@ public class HUDManager : MonoBehaviour
 
     [Header("Middle Point")]
     public GameObject middlePoint;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -42,6 +43,14 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
+        CheckWeaponUI();
+
+        CheckThrowableUI();
+    }
+
+    #region --- Weapon and Ammo ---
+    private void CheckWeaponUI()
+    {
         Weapon activeWeapon = WeaponManager.Instance.activeWeaponSlot.GetComponentInChildren<Weapon>();
         Weapon unActiveWeapon = GetUnActiveWeaponSlot().GetComponentInChildren<Weapon>();
 
@@ -50,19 +59,18 @@ public class HUDManager : MonoBehaviour
             magazineAmmoUI.text = $"{activeWeapon.bulletsLeft / activeWeapon.bulletsPerBurst}";
             totalAmmoUI.text = $"{activeWeapon.CheckAmmoLeftOfCurrentWeapon() / activeWeapon.bulletsPerBurst}";
 
+            activeWeaponUI.sprite = GetWeaponSprite(activeWeapon.currentWeaponModel);
             magazineTypeUI.sprite = GetMagazineSprite(activeWeapon.currentWeaponModel);
             ammoTypeUI.sprite = GetAmmoSprite(activeWeapon.currentWeaponModel);
-
-            activeWeaponUI.sprite = GetWeaponSprite(activeWeapon.currentWeaponModel);
         }
         else
         {
             magazineAmmoUI.text = "0";
             totalAmmoUI.text = "0";
 
+            activeWeaponUI.sprite = emptyWeapon;
             magazineTypeUI.sprite = ResourceLoad("Magazine");
             ammoTypeUI.sprite = ResourceLoad("Ammo");
-            activeWeaponUI.sprite = emptyWeapon;
         }
 
         if (unActiveWeapon != null)
@@ -83,6 +91,19 @@ public class HUDManager : MonoBehaviour
                 return weaponSlot;
         }
         return null;
+    }
+
+    private Sprite GetWeaponSprite(Weapon.WeaponModel model)
+    {
+        switch (model)
+        {
+            case Weapon.WeaponModel.PistolGray:
+                return ResourceLoad("Pistol_Weapon");
+            case Weapon.WeaponModel.M4A1:
+                return ResourceLoad("M4A1_Weapon");
+            default:
+                return null;
+        }
     }
 
     private Sprite GetAmmoSprite(Weapon.WeaponModel model)
@@ -110,19 +131,18 @@ public class HUDManager : MonoBehaviour
                 return null;
         }
     }
+    #endregion
 
-    private Sprite GetWeaponSprite(Weapon.WeaponModel model)
+    #region --- Throwable ---
+    private void CheckThrowableUI()
     {
-        switch (model)
-        {
-            case Weapon.WeaponModel.PistolGray:
-                return ResourceLoad("Pistol_Weapon");
-            case Weapon.WeaponModel.M4A1:
-                return ResourceLoad("M4A1_Weapon");
-            default:
-                return null;
-        }
+        lethalUI.sprite = ResourceLoad("Grenade");
+        lethalAmountUI.text = $"{WeaponManager.Instance.totalGrenade}";
+
+        taticalUI.sprite = ResourceLoad("SmokeGrenade");
+        taticalAmountUI.text = $"{WeaponManager.Instance.totalSmokeGrenade}";
     }
+    #endregion
 
     private Sprite ResourceLoad(string objectName)
     {

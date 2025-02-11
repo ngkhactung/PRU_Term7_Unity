@@ -4,10 +4,6 @@ public class InteractionManager : MonoBehaviour
 {
     public static InteractionManager Instance { get; set; }
 
-    public GameObject hoveredWeapon = null;
-
-    public GameObject hoveredAmmoBox = null;
-
     public GameObject hoveredItem = null;
 
     private void Awake()
@@ -31,7 +27,7 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject objectHitByRay = hit.transform.gameObject;
 
-            if (objectHitByRay.GetComponent<Weapon>() || objectHitByRay.GetComponent<AmmoBox>())
+            if (objectHitByRay.GetComponent<Weapon>() || objectHitByRay.GetComponent<AmmoBox>() || objectHitByRay.GetComponent<Throwable>())
             {
                 hoveredItem = objectHitByRay;
                 hoveredItem.GetComponent<Outline>().enabled = true;
@@ -54,6 +50,10 @@ public class InteractionManager : MonoBehaviour
         else if (hoveredItem.GetComponent<AmmoBox>())
         {
             WeaponManager.Instance.PickUpAmmoBox(hoveredItem);
+        }
+        else if (hoveredItem.GetComponent<Throwable>())
+        {
+            WeaponManager.Instance.PickUpThrowable(hoveredItem);
         }
     }
 }

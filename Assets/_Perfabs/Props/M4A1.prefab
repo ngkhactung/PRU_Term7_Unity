@@ -256,12 +256,12 @@ MonoBehaviour:
   shootingDelay: 0.15
   butlletPrefab: {fileID: 6922481648929464908, guid: f12fec9aa68fa4745aab8734b8a6f599, type: 3}
   bulletSpawn: {fileID: 4359265303830455815}
-  bulletVelocity: 650
+  bulletVelocity: 700
   bulletPerfabLifeTime: 3
   reloadTime: 2
   magazineSize: 30
-  hitSpreadIntensity: 0
-  adsSpreadIntensity: 0
+  hipSpreadIntensity: 0.25
+  adsSpreadIntensity: 0.1
   spawnPosition: {x: 0.76, y: 0.358, z: 1.56}
   spawnRotation: {x: 0, y: 0, z: 0}
   bulletsPerBurst: 1

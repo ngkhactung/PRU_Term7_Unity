@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Getting the inputs
-        float yRotaiton = GlobalReferences.Instance.mouseMovement.GetRotationY();
+        float yRotaiton = MouseMovementManager.Instance.GetRotationY();
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
